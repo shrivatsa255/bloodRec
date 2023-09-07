@@ -103,13 +103,12 @@ const Form = ({formType,submitBtn,formTitle}) => {
         onChange={(e) => setPassword(e.target.value)}   
         />  
         </>
-                    )
+                    );
                 }
                 case formType === 'register' :{
                     return (
                         <>
-                    
-         {(role === "admin" || role === "donar") && (
+         {(role === "donar" ||  role === "admin" )&& (
                            <InputType 
                            labelText={'Name'} 
                            labelFor={'forName'} 
@@ -117,14 +116,15 @@ const Form = ({formType,submitBtn,formTitle}) => {
                            name={'name'}
                            value={name}
                            onChange={(e) => setName(e.target.value)}   
-                              
-/>
-         )}
+                             /> 
+
+           )}
+         
          
         
         <InputType 
         labelText={'Organisation Name'} 
-        labelFor={'fororganisationName'} 
+        labelFor={'forOrganisationName'} 
         inputType={'text'} 
         name={'organisationName'}
         value={organisationName}
@@ -181,7 +181,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
         value={phone}
         onChange={(e) => setPhone(e.target.value)}   
         />   
-                
+        
                         </>
                         
                     )
