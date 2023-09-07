@@ -1,0 +1,21 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}   
+
+/*==========
+==== FORM
+========== */
+
+.form-blood1 img{
+  height:75%;
+  width:150%;
+ 
+}
+
+.form-container{
+  display: flex;
+  align-items: center;
+  min-height:100vh;
+}
