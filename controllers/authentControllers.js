@@ -31,7 +31,7 @@ try{
     res.status(500).send({
         success:false,
         message:'Error In Register API',
-        error
+        error,
     });
 }
 };
