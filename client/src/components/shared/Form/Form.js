@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import InputType from './InputType'
+import { Link } from 'react-router-dom';    //to jump from one page to another
+import { handleLogin, handleRegister } from '../../../services/authService';
 
 const Form = ({formType,submitBtn,formTitle}) => {
     const [email, setEmail] = useState("");     //in the begining it will be blank
@@ -13,7 +15,23 @@ const Form = ({formType,submitBtn,formTitle}) => {
     const [phone,setPhone] = useState("");
   return (
     <div>
-       <form>
+       <form onSubmit={(e) => {
+                if(formType === 'login')
+                 return handleLogin(e,email,password,role);
+                else if(formType === 'register')
+                 return handleRegister(
+            e,
+            name,
+            role,
+            email,
+            password,
+            organisationName,
+            hospitalName,
+            website,
+            address,
+            phone
+            );
+       }}>
         <h1 className="text-center">{formTitle}</h1>
         <hr/>
         <div className="d-flex mb-3">            {/* appears horizontally  */}
@@ -51,7 +69,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
                 className="form-check-input"
                  name="role" 
                  id="hospitalRadio"
-                 value={'admin'} 
+                 value={'hospital'} 
                  onChange={(e) => setRole(e.target.value)}
                  
                  />
@@ -66,7 +84,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
                 className="form-check-input"
                  name="role" 
                  id="organisationRadio"
-                 value={role} 
+                 value={'organisation'} 
                  onChange={(e) => setRole(e.target.value)}
                 
                  />
@@ -120,17 +138,19 @@ const Form = ({formType,submitBtn,formTitle}) => {
 
            )}
          
-         
+         {role === 'organisation' && (
+            <InputType 
+            labelText={'Organisation Name'} 
+            labelFor={'forOrganisationName'} 
+            inputType={'text'} 
+            name={'organisationName'}
+            value={organisationName}
+            onChange={(e) => setOrganizationName(e.target.value)}   
+            />    
+         )}
         
-        <InputType 
-        labelText={'Organisation Name'} 
-        labelFor={'forOrganisationName'} 
-        inputType={'text'} 
-        name={'organisationName'}
-        value={organisationName}
-        onChange={(e) => setOrganizationName(e.target.value)}   
-        />    
-        <InputType 
+        {role === 'hospital' && (
+            <InputType 
         labelText={'Hospital Name'} 
         labelFor={'forHospitalName'} 
         inputType={'text'} 
@@ -138,6 +158,8 @@ const Form = ({formType,submitBtn,formTitle}) => {
         value={hospitalName}
         onChange={(e) => setHospitalName(e.target.value)}   
         /> 
+        )}  
+        
 
              <InputType 
         labelText={'Email'} 
@@ -192,7 +214,17 @@ const Form = ({formType,submitBtn,formTitle}) => {
         
         
                                                                                                 
-            <div className="d-flex">
+            <div className="d-flex flex-row justify-content-between">
+                {formType === 'login' ? (
+                    <p>Not registered yet ? Register
+                        <Link to="/register">  Here !</Link>
+                    </p>
+
+                ) : (
+                        <p>Already User Please 
+                            <Link to="/login">  login !</Link>
+                        </p>
+                )}
             <button className="btn btn-primary" type="submit"> 
                 {submitBtn}
             </button>

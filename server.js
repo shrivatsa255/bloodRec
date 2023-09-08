@@ -28,7 +28,7 @@ app.use("/api/v1/inventory",require("./routes/inventoryRoutes"));
 
 //http://localhost:3000/
 //port 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 //listen
 

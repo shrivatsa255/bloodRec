@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     name:{
         type:String,
         required: function() {
-            if(this.role === 'users' || this.role === 'admin'){
+            if(this.role === 'users' || this.role === 'admin' ){
                 return true
             }
             return false
