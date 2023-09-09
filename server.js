@@ -22,9 +22,9 @@ app.use(morgan('dev'))
 
 //routes
 //1 test route
-app.use("/api/v1/test",require("./routes/testRoutes"))
-app.use("/api/v1/authent",require("./routes/authentRoutes"))
-app.use("/api/v1/inventory",require("./routes/inventoryRoutes"));
+app.use("/api/test",require("./routes/testRoutes"))
+app.use("/api/auth",require("./routes/authentRoutes"))
+app.use("/api/inventory",require("./routes/inventoryRoutes"));
 
 //http://localhost:3000/
 //port 

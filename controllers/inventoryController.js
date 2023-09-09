@@ -1,3 +1,4 @@
+
 const inventoryModel = require("../models/inventoryModel");
 const userModel = require("../models/userModel");
 
@@ -10,7 +11,7 @@ const createInventoryController = async (req,res) => {
         if(!user){
             throw new Error('User not found')     //return can also be used instead of throw
         }
-        if(inventoryType === "in" && user.role !== 'donar'){
+       if(inventoryType === "in" && user.role !== 'donar'){
              throw new Error('not a donar account')
         }
         if(inventoryType === "out" && user.role !== 'hospital'){

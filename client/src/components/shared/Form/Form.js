@@ -234,4 +234,4 @@ const Form = ({formType,submitBtn,formTitle}) => {
   )
 }                     // btn btn-primary is used for bootstrap
 
-export default Form
+export default Form;

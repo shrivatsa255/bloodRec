@@ -4,16 +4,20 @@ const inventorySchema = new mongoose.Schema({
     inventoryType:{
         type:String,
         required:[true,'inventory type require'],
-        enum:['in','out']
+        enum:['in','out'],
     },
     bloodGroup:{
         type:String,
         required:[true,'blood group is required'],
-        enum:['O+','O-','AB+','AB-','A+','A-','B+','B-']
+        enum:['O+','O-','AB+','AB-','A+','A-','B+','B-'],
     },
     quantity:{
         type:Number,
-        required:[true,'blood quantity is required']
+        required:[true,'blood quantity is required'],
+    },
+    email:{
+        type: String,
+        required :[true,"Donar Email is required"],
     },
     organisation:{
         type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +32,7 @@ const inventorySchema = new mongoose.Schema({
         }
     },
     donar:{
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "users",
         required: function () {
             return this.inventoryType ==="in"

@@ -39,11 +39,11 @@ try{
 //login call back
 const loginController = async (req,res) => {
     try{
-      const user = await userModel.findOne({email:req.body.email})
+      const user = await userModel.findOne({email: req.body.email})
       if(!user){
         return res.status(404).send({
             success:false,
-            message:"No User Found"
+            message:"Invalid Credentials"
         })
       }
       //check role
@@ -61,12 +61,12 @@ const loginController = async (req,res) => {
             message:"Invalid Credentials"  // invalid password
         })
       }
-      const token = jwt.sign({userId:user._id},process.env.JWT_SECRET, {expiresIn:'1d'})
+      const token = jwt.sign({userId:user._id}, process.env.JWT_SECRET, {expiresIn:'1d',})
       return res.status(200).send({
         success:true,
         message:"login succesfully",
         token,
-        user
+        user,
       })
       
     }catch(error){
@@ -74,7 +74,7 @@ const loginController = async (req,res) => {
         res.status(500).send({
             success:false,
             message:'Error In Login API',
-            error
+            error,
         })
     }
 };
@@ -83,7 +83,7 @@ const loginController = async (req,res) => {
 //GET CURRENT USER
 const currentUserController = async (req,res) => {
     try{
-        const user = await userModel.findOne({_id:req.body.userId})
+        const user = await userModel.findOne({_id: req.body.userId})
         return res.status(200).send({
             sucess:true,
             message:'user fetched successfully',
