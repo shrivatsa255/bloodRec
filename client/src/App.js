@@ -2,12 +2,13 @@ import {Routes, Route} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 
 import Register from './pages/auth/Register';
-import Login from './pages/auth/login';
+
 
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
 import PublicRoute from './components/Routes/PublicRoute';
+import Login from './pages/auth/Login';
 
 function App() {
   return (

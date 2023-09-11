@@ -51,7 +51,7 @@ export const userRegister = createAsyncThunk(
                         phone})
                         if(data?.success){
                             alert("User Registered Successfully")
-                          //  toast.success("user Registered successfully")
+                          toast.success("user Registered successfully")
                             window.location.replace("/login");       //redirects to the login page from register page
                         }
             }catch(error){
@@ -71,8 +71,8 @@ export const getCurrentUser = createAsyncThunk(
     async ({rejectWithValue}) => {
         try{
             const res = await API.get('/auth/current-user')
-            if(res.data){
-                return res?.data
+            if(res?.data){
+                return res?.data;
             }
         }catch(error){
             console.log(error);

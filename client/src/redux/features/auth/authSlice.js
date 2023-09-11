@@ -9,7 +9,7 @@ const initialState= {
     loading:false,
     user:null,
     token,
-    error:null
+    error:null,
 }
 
 const authSlice = createSlice({
@@ -21,7 +21,7 @@ const authSlice = createSlice({
         builder.addCase(userLogin.pending, (state) => {
             state.loading= true;
             state.error = null;
-        })
+        });
         builder.addCase(userLogin.fulfilled, (state, {payload}) => {
             state.loading = false;
             state.user = payload.user;
@@ -30,8 +30,8 @@ const authSlice = createSlice({
         builder.addCase(userLogin.rejected, (state,{payload}) =>{
             state.loading = false;
             state.error = payload;
-        }
-        )
+        })
+        
         //register user
         builder.addCase(userRegister.pending, (state) => {
             state.loading= true;
