@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
 import PublicRoute from './components/Routes/PublicRoute';
-import Login from './pages/auth/Login';
+import Login from './pages/auth/login';
 
 function App() {
   return (
