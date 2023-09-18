@@ -12,12 +12,12 @@ const createInventoryController = async (req,res) => {
         if(!user){
             throw new Error('User not found')     //return can also be used instead of throw
         }
-     //  if(inventoryType === "in" && user.role !== 'donar'){
-     //        throw new Error('not a donar account')
-      //  }
-        //if(inventoryType === "out" && user.role !== 'hospital'){
-        //    throw new Error('not a hospital ')
-        //}
+     if(req.body.inventoryType === "in" && user.role !== 'donar'){
+             throw new Error('not a donar account')
+        }
+        if(req.body.inventoryType === "out" && user.role !== 'hospital'){
+            throw new Error('not a hospital ')
+        }
 
         if(req.body.inventoryType == 'out'){
             const requestedBloodGroup = req.body.bloodGroup
@@ -85,7 +85,7 @@ const createInventoryController = async (req,res) => {
         console.log(error)
         return res.status(500).send({
             success:false,
-            message:"Error in create inventory API",
+            message:error.message,
             error
         })
     }
@@ -108,7 +108,7 @@ const getInventoryController = async (req,res) => {
         console.log(error)
         return res.status(500).send({
             success:false,
-            message: ' Error In Get All Inventory',
+            message:error.message,
             error,
         })
     }
@@ -152,7 +152,7 @@ const getRecentInventoryController = async (req,res) => {
         console.log(error)
         return res.status(500).send({
             success:false,
-            message:'Error In React Inventory API',
+            message:error.message,
             error
         })
     }
@@ -164,9 +164,9 @@ const getDonarsController = async (req, res) => {
         const organisation = req.body.userId
         //find donars
         const donarId = await inventoryModel.distinct('donar',{
-            organisation,
+            organisation
         })
-     //   console.log(donarId)
+     console.log(donarId)
      const donars = await userModel.find({_id: {$in: donarId}})
      return res.status(200).send({
         success : true ,
@@ -188,7 +188,7 @@ const getHospitalsController = async (req,res) => {
     try {
         const organisation = req.body.userId
         //GET HOSPITAL ID
-        const hospitalId = await inventoryModel.distinct('hospital', {organisation,})
+        const hospitalId = await inventoryModel.distinct('hospital', {organisation})
         //FIND HOSPITAL
         const hospitals = await userModel.find({
             _id:{ $in: hospitalId},

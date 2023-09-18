@@ -57,7 +57,7 @@ const Sidebar = () => {
                         <div className={`menu-item ${location.pathname === "/org-list " && 'active'}`} 
                         >
                         <i className="fa-solid fa-hospital"></i>
-                        <Link to="/hospital">Organisation List</Link>
+                        <Link to="/org-list">Organisation List</Link>
                         </div>
                     
                     </>
