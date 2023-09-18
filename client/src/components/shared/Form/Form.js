@@ -25,13 +25,15 @@ const Form = ({formType,submitBtn,formTitle}) => {
             role,
             email,
             password,
+            phone,
             organisationName,
+            address,
             hospitalName,
             website,
-            address,
-            phone
+            
             );
-       }}>
+       }}
+       >
         <h1 className="text-center">{formTitle}</h1>
         <hr/>
         <div className="d-flex mb-3">            {/* appears horizontally  */}
@@ -45,7 +47,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
                  onChange={(e) => setRole(e.target.value)}
                  defaultChecked
                  />
-                 <label htmlFor="donarRadio" className="form-check-label">
+                 <label htmlFor="adminRadio" className="form-check-label">
                     Donar
                  </label>
             </div>
@@ -221,7 +223,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
                     </p>
 
                 ) : (
-                        <p>Already User Please 
+                        <p >Already User Please 
                             <Link to="/login">  login !</Link>
                         </p>
                 )}

@@ -114,6 +114,50 @@ const getInventoryController = async (req,res) => {
     }
 };
 
+// GET Hospital BLOOD RECORDS
+
+const getInventoryHospitalController = async (req,res) => {
+    try{
+        const inventory = await  inventoryModel.find(req.body.filters)
+        .populate('donar')
+        .populate('hospital')
+        .populate('organisation')
+        .sort({ createdAt: -1 })
+        return res.status(200).send({
+            success:true,
+            message:"get hospital consumer records successfully",
+            inventory,
+        });
+    }catch(error){
+        console.log(error)
+        return res.status(500).send({
+            success:false,
+            message: ' Error In Get Consumer Inventory',
+            error,
+        })
+    }
+};
+
+//GET BLOOD RECORD OF 3
+const getRecentInventoryController = async (req,res) => {
+    try {
+        const inventory = await inventoryModel.find({
+            organisation:req.body.userId
+        }).limit(3).sort({createdAt: -1})
+        return res.status(200).send({
+            success:true,
+            message:'Recent Inventory Records',inventory});
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            success:false,
+            message:'Error In React Inventory API',
+            error
+        })
+    }
+}
+
 //GET DONAR RECORDS
 const getDonarsController = async (req, res) => {
     try {
@@ -167,6 +211,32 @@ const getHospitalsController = async (req,res) => {
 //GET ORGANISATION PROFILE
 const getOrganisationController = async (req,res) => {
     try {
+        const hospital = req.body.userId
+        const orgId = await inventoryModel.distinct('organisation',{ hospital });
+        //find org
+        const organisations = await userModel.find({
+            _id: {$in: orgId}
+        })
+        return res.status(200).send({
+            success : true,
+            message : 'Hospital Org Data Fetched Successfully',
+            organisations,
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            success :false  ,
+            message : 'Error In Hospital ORG API',
+            error
+        })
+        
+    }
+}
+
+
+//GET ORGANISATION for hospital
+const getOrganisationForHospitalController = async (req,res) => {
+    try {
         const donar = req.body.userId
         const orgId = await inventoryModel.distinct('organisation',{donar})
         //find org
@@ -188,11 +258,13 @@ const getOrganisationController = async (req,res) => {
         
     }
 }
-
 module.exports = { 
     createInventoryController,
      getInventoryController,
       getDonarsController,
     getHospitalsController,
     getOrganisationController,
+    getOrganisationForHospitalController,
+    getInventoryHospitalController,
+    getRecentInventoryController,
  };
